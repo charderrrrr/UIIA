@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Умный генератор нагрузки";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <button class="music-toggle" id="musicToggle" onclick="toggleMusic()">ВКЛЮЧИТЬ МУЗЫКУ</button>
+
+    <div class="overlay" id="uiiaOverlay">
+        <img src="/img/uiia-cat.gif" alt="uiia uiia cat">
+        <p>UIJA UIJA UIJA</p>
+    </div>
+
+    <div class="container">
+        <h1>UIJA UIJA GENERATOR</h1>
+
+        <div class="info-banner">
+            HTTP, TCP, WebSocket тестирование с автоматическим анализом и отчётами
+        </div>
+
+        <form id="testForm">
+            <div class="form-section">
+                <h2>Конфигурация цели</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="target">URL цели</label>
+                        <input type="text" id="target" name="target" value="http://localhost:8080/api" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="protocol">Протокол</label>
+                        <select id="protocol" name="protocol">
+                            <option value="http">HTTP</option>
+                            <option value="tcp">Raw TCP</option>
+                            <option value="ws">WebSocket</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="durationSec">Длительность (сек)</label>
+                        <input type="number" id="durationSec" name="durationSec" value="60" min="1">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Параметры нагрузки</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="mode">Режим</label>
+                        <select id="mode" name="mode">
+                            <option value="constant">Постоянный RPS</option>
+                            <option value="linear_ramp">Линейный рост</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="minRps">Мин. RPS</label>
+                        <input type="number" id="minRps" name="minRps" value="10" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="maxRps">Макс. RPS</label>
+                        <input type="number" id="maxRps" name="maxRps" value="500" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeoutMs">Таймаут (мс)</label>
+                        <input type="number" id="timeoutMs" name="timeoutMs" value="3000" min="100">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Заголовки</h2>
+                <div class="headers-container" id="headersContainer">
+                    <div class="header-row">
+                        <input type="text" placeholder="Название заголовка" value="Content-Type">
+                        <input type="text" placeholder="Значение заголовка" value="application/json">
+                        <button type="button" class="btn btn-remove" onclick="removeHeaderRow(this)" title="Удалить">x</button>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-add" onclick="addHeaderRow()">+ Добавить заголовок</button>
+            </div>
+
+            <div class="form-section">
+                <h2>Датасет (опционально)</h2>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="datasetFile">Путь к CSV файлу</label>
+                        <input type="text" id="datasetFile" name="datasetFile" placeholder="traffic.csv">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeScale">Масштаб времени</label>
+                        <input type="number" id="timeScale" name="timeScale" value="1.0" step="0.1" min="0.1">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                ЗАПУСТИТЬ ТЕСТ
+            </button>
+        </form>
+
+        <div class="result-container" id="resultContainer">
+            <h2>ТЕСТ ЗАВЕРШЁН</h2>
+            <p><a href="#" id="reportLink" target="_blank">Открыть отчёт</a></p>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+[
+  {
+    "Timestamp": 1779638580072,
+    "LatencyMs": 372,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638581076,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638582085,
+    "LatencyMs": 7,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638583093,
+    "LatencyMs": 7,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638584098,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638585108,
+    "LatencyMs": 9,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638586114,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638587121,
+    "LatencyMs": 7,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638588129,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638589136,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638590142,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638591152,
+    "LatencyMs": 8,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638592157,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638593163,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638594171,
+    "LatencyMs": 7,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638595177,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638596183,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638597189,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638598193,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638599198,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638600206,
+    "LatencyMs": 7,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638601213,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638602219,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638603225,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638604232,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638605239,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638606245,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638607252,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638608257,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638609263,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638610275,
+    "LatencyMs": 9,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638611282,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638612287,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638613291,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638614296,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638615300,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638616304,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638617307,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638618312,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638619318,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638620323,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638621327,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638622333,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638623337,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638624341,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638625346,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638626350,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638627355,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638628360,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638629364,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638630369,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638631375,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638632381,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638633385,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638634389,
+    "LatencyMs": 3,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638635395,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638636400,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638637407,
+    "LatencyMs": 6,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638638413,
+    "LatencyMs": 5,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  },
+  {
+    "Timestamp": 1779638639419,
+    "LatencyMs": 4,
+    "StatusCode": 0,
+    "ResponseSizeBytes": 0,
+    "IsError": true
+  }
+]

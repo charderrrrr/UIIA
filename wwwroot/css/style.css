@@ -1,0 +1,297 @@
+@font-face {
+    font-family: 'Medium';
+    src: url('../font/Benzin-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Regular';
+    src: url('../font/Benzin-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Regular', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: rgb(20, 7, 7);
+    color: rgb(235, 180, 180);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-family: 'Medium', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: rgb(240, 200, 200);
+}
+
+.form-section {
+    background: rgba(209, 97, 97, 0.05);
+    border: 1px solid rgba(209, 97, 97, 0.15);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 20px;
+}
+
+.form-section h2 {
+    font-family: 'Medium', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: rgb(240, 200, 200);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-family: 'Medium', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgb(200, 150, 150);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px 14px;
+    border: 1px solid rgba(209, 97, 97, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Regular', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+    background: rgba(20, 7, 7, 0.8);
+    color: rgb(235, 180, 180);
+}
+
+.form-group input::placeholder {
+    color: rgb(150, 100, 100);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: rgb(235, 180, 180);
+    background: rgb(20, 7, 7);
+}
+
+.form-group select option {
+    background: rgb(20, 7, 7);
+    color: rgb(235, 180, 180);
+}
+
+.headers-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    align-items: end;
+}
+
+.header-row input{
+    padding: 10px 14px;
+    border: 1px solid rgba(209, 97, 97, 0.3);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Regular', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+    background: rgba(20, 7, 7, 0.8);
+    color: rgb(235, 180, 180);
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'Medium', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: rgb(209, 97, 97);
+    color: rgb(20, 7, 7);
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.btn-primary:hover {
+    background: rgb(220, 130, 130);
+}
+
+.btn-primary:disabled {
+    background: rgba(209, 97, 97, 0.3);
+    color: rgba(20, 7, 7, 0.5);
+    cursor: not-allowed;
+}
+
+.btn-remove {
+    background: rgba(209, 97, 97, 0.15);
+    color: rgb(235, 180, 180);
+    padding: 10px;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Medium', sans-serif;
+}
+
+.btn-remove:hover {
+    background: rgb(209, 97, 97);
+    color: rgb(20, 7, 7);
+}
+
+.btn-add {
+    background: rgba(209, 97, 97, 0.15);
+    color: rgb(235, 180, 180);
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+.btn-add:hover {
+    background: rgba(209, 97, 97, 0.3);
+    color: rgb(240, 200, 200);
+}
+
+.result-container {
+    background: rgba(209, 97, 97, 0.05);
+    border: 1px solid rgba(209, 97, 97, 0.15);
+    border-radius: 12px;
+    padding: 28px;
+    margin-top: 20px;
+    display: none;
+}
+
+.result-container.active {
+    display: block;
+}
+
+.result-container h2 {
+    font-family: 'Medium', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(240, 200, 200);
+    margin-bottom: 16px;
+}
+
+.result-container a {
+    color: rgb(235, 180, 180);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(235, 180, 180, 0.3);
+}
+
+.result-container a:hover {
+    border-bottom-color: rgb(235, 180, 180);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 7, 7, 0.92);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.overlay.active {
+    display: flex;
+}
+
+.overlay img {
+    border-radius: 20px;
+    max-width: 300px;
+}
+
+.overlay p {
+    font-family: 'Medium', sans-serif;
+    font-size: 24px;
+    color: rgb(240, 200, 200);
+    animation: uiiaPulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes uiiaPulse {
+    from {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+}
+
+.info-banner {
+    background: rgba(209, 97, 97, 0.05);
+    border: 1px solid rgba(209, 97, 97, 0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: rgb(190, 140, 140);
+    margin-bottom: 20px;
+}
+
+.music-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: rgba(209, 97, 97, 0.15);
+    border: 1px solid rgba(209, 97, 97, 0.3);
+    color: rgb(235, 180, 180);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: 'Medium', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.music-toggle:hover {
+    background: rgba(209, 97, 97, 0.3);
+    color: rgb(240, 200, 200);
+}
