@@ -12,6 +12,23 @@
     font-style: normal;
 }
 
+#durationSec,
+#minRps,
+#maxRps,
+#timeoutMs,
+#timeScale,
+#packetSize,
+#packetDelayMs {
+  -moz-appearance: textfield;
+}
+
+
+#durationSec::-webkit-outer-spin-button,
+#durationSec::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -21,14 +38,33 @@
 body {
     font-family: 'Regular', 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: rgb(20, 7, 7);
-    color: rgb(235, 180, 180);
+    color: rgb(255, 222, 222);
     min-height: 100vh;
 }
 
+header{
+    display: flex;
+    flex-direction: row;
+    gap: 1.4rem;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+header img{
+    width: 60px;
+}
+
 .container {
-    max-width: 800px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
+        
+}
+
+.group-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
 }
 
 h1 {
@@ -36,12 +72,12 @@ h1 {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 32px;
-    color: rgb(240, 200, 200);
+    color: rgb(253, 101, 101);
 }
 
 .form-section {
-    background: rgba(209, 97, 97, 0.05);
-    border: 1px solid rgba(209, 97, 97, 0.15);
+    background: rgba(112, 50, 50, 0.308);
+    border: 1px solid rgba(209, 97, 97, 0.342);
     border-radius: 12px;
     padding: 28px;
     margin-bottom: 20px;
@@ -74,7 +110,7 @@ h1 {
     font-family: 'Medium', 'Segoe UI', system-ui, -apple-system, sans-serif;
     font-size: 13px;
     font-weight: 600;
-    color: rgb(200, 150, 150);
+    color: rgb(236, 170, 170);
     margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -144,16 +180,32 @@ h1 {
 }
 
 .btn-primary {
-    background: rgb(209, 97, 97);
+    background: rgba(230, 94, 94, 0.815);
     color: rgb(20, 7, 7);
     width: 100%;
     padding: 14px;
     font-size: 16px;
     margin-top: 8px;
+    text-decoration: none;
+    color: inherit;
+    outline: none;
 }
 
+.btn-report {
+    background: rgba(230, 94, 94, 0.815);
+    color: rgb(255, 224, 224);
+    padding: 14px;
+    font-size: 16px;
+    margin-top: 8px; 
+    width: 350px;
+    text-decoration: none;
+    color: inherit;
+    outline: none;       
+}
+
+
 .btn-primary:hover {
-    background: rgb(220, 130, 130);
+    background: rgb(255, 107, 107);
 }
 
 .btn-primary:disabled {
@@ -208,8 +260,8 @@ h1 {
     font-family: 'Medium', sans-serif;
     font-size: 18px;
     font-weight: 600;
-    color: rgb(240, 200, 200);
-    margin-bottom: 16px;
+    color: rgb(209, 97, 97);
+    margin-bottom: 30px;
 }
 
 .result-container a {
@@ -250,7 +302,7 @@ h1 {
 .overlay p {
     font-family: 'Medium', sans-serif;
     font-size: 24px;
-    color: rgb(240, 200, 200);
+    color: rgb(255, 224, 224);
     animation: uiiaPulse 0.5s ease-in-out infinite alternate;
 }
 
@@ -266,12 +318,12 @@ h1 {
 }
 
 .info-banner {
-    background: rgba(209, 97, 97, 0.05);
+    background: rgba(112, 50, 50, 0.308);
     border: 1px solid rgba(209, 97, 97, 0.1);
     border-radius: 8px;
     padding: 12px 16px;
-    font-size: 13px;
-    color: rgb(190, 140, 140);
+    font-size: 16px;
+    color: rgb(238, 128, 128);
     margin-bottom: 20px;
 }
 
@@ -295,3 +347,4 @@ h1 {
     background: rgba(209, 97, 97, 0.3);
     color: rgb(240, 200, 200);
 }
+

@@ -86,9 +86,12 @@ document.getElementById('testForm').addEventListener('submit', async function(e)
         protocol: document.getElementById('protocol').value,
         durationSec: parseInt(document.getElementById('durationSec').value),
         mode: document.getElementById('mode').value,
+        attackMode: document.getElementById('attackMode').value,
         minRps: parseInt(document.getElementById('minRps').value),
         maxRps: parseInt(document.getElementById('maxRps').value),
         timeoutMs: parseInt(document.getElementById('timeoutMs').value),
+        packetSize: parseInt(document.getElementById('packetSize').value),
+        packetDelayMs: parseInt(document.getElementById('packetDelayMs').value),
         headers: headers,
         datasetFile: document.getElementById('datasetFile').value,
         timeScale: parseFloat(document.getElementById('timeScale').value)

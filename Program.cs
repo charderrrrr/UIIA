@@ -23,6 +23,8 @@ namespace UIIA
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.Urls.Add("http://localhost:5002");
+
             app.UseStaticFiles();
             app.UseRouting();
             app.MapControllerRoute(

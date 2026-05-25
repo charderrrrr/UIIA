@@ -17,6 +17,9 @@ namespace UIIA.Models
         [JsonPropertyName("mode")]
         public string Mode { get; set; } = "constant";
 
+        [JsonPropertyName("attack_mode")]
+        public string AttackMode { get; set; } = "standard";
+
         [JsonPropertyName("min_rps")]
         public int MinRps { get; set; } = 1;
 
@@ -28,6 +31,12 @@ namespace UIIA.Models
 
         [JsonPropertyName("timeout_ms")]
         public int TimeoutMs { get; set; } = 3000;
+
+        [JsonPropertyName("packet_size")]
+        public int PacketSize { get; set; } = 256;
+
+        [JsonPropertyName("packet_delay_ms")]
+        public int PacketDelayMs { get; set; } = 1000;
 
         [JsonPropertyName("dataset_file")]
         public string DatasetFile { get; set; } = string.Empty;

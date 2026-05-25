@@ -25,7 +25,7 @@ namespace UIIA.Reporting
             html.Append("<body>");
 
             html.Append("<div class=\"container\">");
-            html.Append("<h1>UIJA UIJA REPORT</h1>");
+            html.Append("<h1>UIIA UIIA REPORT</h1>");
 
             html.Append("<div class=\"section\">");
             html.Append("<h2>Параметры теста</h2>");

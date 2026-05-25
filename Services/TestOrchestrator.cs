@@ -24,10 +24,13 @@ namespace UIIA.Services
                 Protocol = request.Protocol,
                 DurationSec = request.DurationSec,
                 Mode = request.Mode,
+                AttackMode = request.AttackMode,
                 MinRps = request.MinRps,
                 MaxRps = request.MaxRps,
                 Connections = request.Connections,
                 TimeoutMs = request.TimeoutMs,
+                PacketSize = request.PacketSize,
+                PacketDelayMs = request.PacketDelayMs,
                 Headers = request.Headers,
                 BodyFile = request.BodyFile,
                 DatasetFile = request.DatasetFile
