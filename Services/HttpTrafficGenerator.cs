@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using UIIA.Models;
@@ -11,7 +12,6 @@ namespace UIIA.Services
     public class HttpTrafficGenerator : ITrafficGenerator
     {
         private readonly HttpClient _httpClient;
-        private readonly Random _random = new();
         private static readonly string[] UserAgents = new[]
         {
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -126,15 +126,15 @@ namespace UIIA.Services
                 var path = GenerateRandomPath();
                 var fullUri = new Uri(uri, path);
 
-                if (_random.Next(2) == 0)
+                if (Random.Shared.Next(2) == 0)
                 {
-                    var builder = new System.Text.StringBuilder(fullUri.ToString());
+                    var builder = new StringBuilder(fullUri.ToString());
                     builder.Append(builder.ToString().Contains("?") ? "&" : "?");
-                    builder.Append($"_={GenerateRandomString(8)}");
+                    builder.Append($"_={GenerateSecureRandomString(8)}");
                     fullUri = new Uri(builder.ToString());
                 }
 
-                var useGet = _random.Next(100) < 80;
+                var useGet = Random.Shared.Next(100) < 80;
                 using var request = new HttpRequestMessage(useGet ? HttpMethod.Get : HttpMethod.Post, fullUri);
 
                 SetMimicHeaders(request, config);
@@ -142,18 +142,18 @@ namespace UIIA.Services
                 if (!useGet)
                 {
                     var bodySize = Math.Max(config.PacketSize, 256);
-                    var body = GenerateRandomString(bodySize);
+                    var body = GenerateSecureRandomString(bodySize);
                     request.Content = new StringContent(body, Encoding.UTF8, "application/x-www-form-urlencoded");
                 }
 
-                if (_random.Next(2) == 0)
+                if (Random.Shared.Next(2) == 0)
                 {
-                    request.Headers.Referrer = new Uri(Referers[_random.Next(Referers.Length)]);
+                    request.Headers.Referrer = new Uri(Referers[Random.Shared.Next(Referers.Length)]);
                 }
 
-                if (_random.Next(2) == 0)
+                if (Random.Shared.Next(2) == 0)
                 {
-                    request.Headers.TryAddWithoutValidation("Cookie", $"_ga={GenerateRandomString(8)}; _gid={GenerateRandomString(8)}");
+                    request.Headers.TryAddWithoutValidation("Cookie", $"_ga={GenerateSecureRandomString(8)}; _gid={GenerateSecureRandomString(8)}");
                 }
 
                 using var cts = new System.Threading.CancellationTokenSource(config.TimeoutMs);
@@ -182,8 +182,8 @@ namespace UIIA.Services
 
             try
             {
-                var isGet = config.PacketSize <= 512 && _random.Next(2) == 0;
-                var payload = GenerateRandomString(config.PacketSize);
+                var isGet = config.PacketSize <= 512 && Random.Shared.Next(2) == 0;
+                var payload = GenerateSecureRandomString(config.PacketSize);
                 using var request = new HttpRequestMessage(isGet ? HttpMethod.Get : HttpMethod.Post, target);
 
                 if (isGet)
@@ -196,7 +196,7 @@ namespace UIIA.Services
                     request.Content = new StringContent(payload, Encoding.UTF8, "text/plain");
                 }
 
-                request.Headers.TryAddWithoutValidation("User-Agent", UserAgents[_random.Next(UserAgents.Length)]);
+                request.Headers.TryAddWithoutValidation("User-Agent", UserAgents[Random.Shared.Next(UserAgents.Length)]);
 
                 using var cts = new System.Threading.CancellationTokenSource(config.TimeoutMs);
                 using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
@@ -219,11 +219,11 @@ namespace UIIA.Services
 
         private void SetMimicHeaders(HttpRequestMessage request, TestConfig config)
         {
-            request.Headers.TryAddWithoutValidation("User-Agent", UserAgents[_random.Next(UserAgents.Length)]);
-            request.Headers.TryAddWithoutValidation("Accept", AcceptHeaders[_random.Next(AcceptHeaders.Length)]);
-            request.Headers.TryAddWithoutValidation("Accept-Language", AcceptLanguages[_random.Next(AcceptLanguages.Length)]);
+            request.Headers.TryAddWithoutValidation("User-Agent", UserAgents[Random.Shared.Next(UserAgents.Length)]);
+            request.Headers.TryAddWithoutValidation("Accept", AcceptHeaders[Random.Shared.Next(AcceptHeaders.Length)]);
+            request.Headers.TryAddWithoutValidation("Accept-Language", AcceptLanguages[Random.Shared.Next(AcceptLanguages.Length)]);
             request.Headers.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate, br");
-            request.Headers.TryAddWithoutValidation("Cache-Control", _random.Next(2) == 0 ? "no-cache" : "max-age=0");
+            request.Headers.TryAddWithoutValidation("Cache-Control", Random.Shared.Next(2) == 0 ? "no-cache" : "max-age=0");
             request.Headers.TryAddWithoutValidation("Sec-Ch-Ua", "\"Chromium\";v=\"124\", \"Google Chrome\";v=\"124\"");
             request.Headers.TryAddWithoutValidation("Sec-Ch-Ua-Mobile", "?0");
             request.Headers.TryAddWithoutValidation("Sec-Ch-Ua-Platform", "\"Windows\"");
@@ -237,29 +237,30 @@ namespace UIIA.Services
             }
         }
 
-        private string GenerateRandomPath()
+        private static string GenerateRandomPath()
         {
             var exts = new[] { "", "", ".js", ".css", ".png", ".jpg", ".svg", ".html" };
-            var basePath = GenerateRandomString(6);
-            var ext = exts[_random.Next(exts.Length)];
+            var basePath = GenerateSecureRandomString(6);
+            var ext = exts[Random.Shared.Next(exts.Length)];
 
-            if (_random.Next(3) == 0)
+            if (Random.Shared.Next(3) == 0)
             {
-                return basePath + "/" + GenerateRandomString(4) + ext;
+                return basePath + "/" + GenerateSecureRandomString(4) + ext;
             }
 
             return basePath + ext;
         }
 
-        private string GenerateRandomString(int length)
+        private static string GenerateSecureRandomString(int length)
         {
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            var result = new char[length];
-            for (int i = 0; i < length; i++)
+            return string.Create(length, (chars, length), (span, state) =>
             {
-                result[i] = chars[_random.Next(chars.Length)];
-            }
-            return new string(result);
+                for (int i = 0; i < state.length; i++)
+                {
+                    span[i] = state.chars[Random.Shared.Next(state.chars.Length)];
+                }
+            });
         }
     }
 }

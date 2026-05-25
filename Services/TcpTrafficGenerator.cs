@@ -7,12 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using UIIA.Models;
 
+
 namespace UIIA.Services
 {
     public class TcpTrafficGenerator : ITrafficGenerator
     {
-        private static readonly Random _random = new();
-
         public string Protocol => "tcp";
 
         public async Task<MetricRecord> SendRequestAsync(string target, TestConfig config)
