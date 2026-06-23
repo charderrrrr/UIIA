@@ -6,8 +6,6 @@
 
 ## Быстрый запуск в браузере
 
-Нажми кнопку ниже и через минуту проект откроется прямо в браузере:
-
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/charderrrrr/UIIA)
 
 ## Возможности
