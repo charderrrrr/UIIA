@@ -18,6 +18,7 @@ namespace UIIA.Models
         public Dictionary<string, string> Headers { get; set; } = new();
         public string BodyFile { get; set; } = string.Empty;
         public string DatasetFile { get; set; } = string.Empty;
+        public string DatasetContent { get; set; } = string.Empty;
         public double TimeScale { get; set; } = 1.0;
     }
 }

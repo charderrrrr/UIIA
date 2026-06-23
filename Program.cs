@@ -13,7 +13,7 @@ namespace UIIA
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddSingleton<TestOrchestrator>();
-            builder.Services.AddSingleton<LinearRegression>();
+            builder.Services.AddTransient<LinearRegression>();  
             builder.Services.AddSingleton<Analyzer>();
 
             var app = builder.Build();

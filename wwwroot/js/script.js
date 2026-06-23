@@ -62,6 +62,16 @@ function removeHeaderRow(button) {
     }
 }
 
+document.getElementById('datasetFile').addEventListener('change', function(e) {
+    const fileName = e.target.files[0]?.name;
+    const span = document.getElementById('datasetFileName');
+    if (fileName) {
+        span.textContent = 'Выбран файл: ' + fileName;
+    } else {
+        span.textContent = '';
+    }
+});
+
 document.getElementById('testForm').addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -81,6 +91,18 @@ document.getElementById('testForm').addEventListener('submit', async function(e)
         }
     });
 
+    let datasetContent = '';
+    const datasetFileInput = document.getElementById('datasetFile');
+    if (datasetFileInput.files.length > 0) {
+        const file = datasetFileInput.files[0];
+        datasetContent = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = () => reject(new Error('Ошибка чтения файла датасета'));
+            reader.readAsText(file, 'UTF-8');
+        });
+    }
+
     const payload = {
         target: document.getElementById('target').value,
         protocol: document.getElementById('protocol').value,
@@ -93,7 +115,7 @@ document.getElementById('testForm').addEventListener('submit', async function(e)
         packetSize: parseInt(document.getElementById('packetSize').value),
         packetDelayMs: parseInt(document.getElementById('packetDelayMs').value),
         headers: headers,
-        datasetFile: document.getElementById('datasetFile').value,
+        datasetContent: datasetContent,
         timeScale: parseFloat(document.getElementById('timeScale').value)
     };
 
@@ -109,6 +131,8 @@ document.getElementById('testForm').addEventListener('submit', async function(e)
         if (response.ok) {
             document.getElementById('reportLink').href = data.reportPath;
             resultContainer.classList.add('active');
+        } else if (response.status === 409) {
+            alert('Тест уже выполняется. Дождитесь завершения текущего теста.');
         } else {
             alert('Ошибка: ' + (data.title || 'Неизвестная ошибка'));
         }

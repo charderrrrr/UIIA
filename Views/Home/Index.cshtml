@@ -118,13 +118,59 @@
                     <h2>Датасет (опционально)</h2>
                     <div class="form-grid">
                         <div class="form-group full-width">
-                            <label for="datasetFile">Путь к CSV файлу</label>
-                            <input type="text" id="datasetFile" name="datasetFile" placeholder="traffic.csv">
+                            <label for="datasetFile">CSV файл датасета</label>
+                            <input type="file" id="datasetFile" name="datasetFile" accept=".csv">
+                            <span id="datasetFileName" style="font-size: 12px; color: rgb(180,130,130); margin-top: 4px; display: block;"></span>
                         </div>
                         <div class="form-group">
                             <label for="timeScale">Масштаб времени</label>
                             <input type="number" id="timeScale" name="timeScale" value="1.0" step="0.1" min="0.1">
                         </div>
+                    </div>
+                    <div class="csv-requirements" style="margin-top: 12px; padding: 12px; background: rgba(209, 97, 97, 0.05); border: 1px solid rgba(209, 97, 97, 0.15); border-radius: 8px; font-size: 13px; color: rgb(200, 150, 150); line-height: 1.6;">
+                        <strong style="color: rgb(235, 180, 180);">Требования к CSV-файлу:</strong>
+                        <ul style="margin: 6px 0 0 16px; padding: 0;">
+                            <li>Кодировка: <strong>UTF-8</strong></li>
+                            <li>Разделитель: <strong>запятая</strong></li>
+                            <li>Обязательные колонки:</li>
+                        </ul>
+                        <table style="margin: 6px 0 0 16px; border-collapse: collapse; font-size: 12px;">
+                            <thead>
+                                <tr style="color: rgb(220, 170, 170);">
+                                    <th style="text-align: left; padding: 4px 12px 4px 0; border-bottom: 1px solid rgba(209, 97, 97, 0.2);">Колонка</th>
+                                    <th style="text-align: left; padding: 4px 12px; border-bottom: 1px solid rgba(209, 97, 97, 0.2);">Тип</th>
+                                    <th style="text-align: left; padding: 4px 0; border-bottom: 1px solid rgba(209, 97, 97, 0.2);">Описание</th>
+                                </tr>
+                            </thead>
+                            <tbody style="color: rgb(180, 130, 130);">
+                                <tr>
+                                    <td style="padding: 4px 12px 4px 0;"><code style="background: rgba(209, 97, 97, 0.1); padding: 1px 6px; border-radius: 3px;">time_ms</code></td>
+                                    <td style="padding: 4px 12px;">число</td>
+                                    <td style="padding: 4px 0;">Время запроса в миллисекундах от начала сценария</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px 12px 4px 0;"><code style="background: rgba(209, 97, 97, 0.1); padding: 1px 6px; border-radius: 3px;">method</code></td>
+                                    <td style="padding: 4px 12px;">строка</td>
+                                    <td style="padding: 4px 0;">HTTP-метод (GET, POST, PUT, DELETE)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px 12px 4px 0;"><code style="background: rgba(209, 97, 97, 0.1); padding: 1px 6px; border-radius: 3px;">endpoint</code></td>
+                                    <td style="padding: 4px 12px;">строка</td>
+                                    <td style="padding: 4px 0;">Путь эндпоинта (например, /api/users)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 4px 12px 4px 0;"><code style="background: rgba(209, 97, 97, 0.1); padding: 1px 6px; border-radius: 3px;">body_file</code></td>
+                                    <td style="padding: 4px 12px;">строка</td>
+                                    <td style="padding: 4px 0;">Имя файла с телом запроса (опционально)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin: 8px 0 0 0; font-size: 12px; color: rgb(160, 110, 110);">Пример строки:</p>
+                        <code style="display: block; margin: 4px 0 0 0; padding: 6px 10px; background: rgba(0, 0, 0, 0.3); border-radius: 4px; font-size: 12px; word-break: break-all; color: rgb(200, 160, 160);">
+                            0,GET,/api/status,<br>
+                            150,GET,/api/users,<br>
+                            300,POST,/api/users,create_user.json
+                        </code>
                     </div>
                 </div>
             </div>

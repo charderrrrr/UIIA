@@ -348,3 +348,11 @@ h1 {
     color: rgb(240, 200, 200);
 }
 
+#datasetFile {
+    color: rgb(235, 180, 180);
+    cursor: pointer;
+}
+
+#datasetFile::file-selector-button {
+    display: none;
+}

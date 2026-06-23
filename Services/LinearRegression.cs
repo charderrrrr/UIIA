@@ -6,17 +6,11 @@ namespace UIIA.Services
 {
     public class LinearRegression
     {
-        public double Slope { get; private set; }
-        public double Intercept { get; private set; }
-        public double RSquared { get; private set; }
-
-        public void Fit(List<double> x, List<double> y)
+        public RegressionResult Fit(List<double> x, List<double> y)
         {
             if (x.Count != y.Count || x.Count == 0)
             {
-                Slope = 0;
-                Intercept = 0;
-                return;
+                return new RegressionResult(0, 0, 0);
             }
 
             var n = x.Count;
@@ -32,25 +26,38 @@ namespace UIIA.Services
                 denominator += Math.Pow(x[i] - meanX, 2);
             }
 
-            Slope = denominator != 0 ? numerator / denominator : 0;
-            Intercept = meanY - Slope * meanX;
+            var slope = denominator != 0 ? numerator / denominator : 0;
+            var intercept = meanY - slope * meanX;
 
             var ssRes = 0.0;
             var ssTot = 0.0;
             
             for (int i = 0; i < n; i++)
             {
-                var predicted = Predict(x[i]);
+                var predicted = slope * x[i] + intercept;
                 ssRes += Math.Pow(y[i] - predicted, 2);
                 ssTot += Math.Pow(y[i] - meanY, 2);
             }
 
-            RSquared = ssTot != 0 ? 1 - (ssRes / ssTot) : 0;
+            var rSquared = ssTot != 0 ? 1 - (ssRes / ssTot) : 0;
+
+            return new RegressionResult(slope, intercept, rSquared);
+        }
+    }
+
+    public class RegressionResult
+    {
+        public double Slope { get; }
+        public double Intercept { get; }
+        public double RSquared { get; }
+
+        public RegressionResult(double slope, double intercept, double rSquared)
+        {
+            Slope = slope;
+            Intercept = intercept;
+            RSquared = rSquared;
         }
 
-        public double Predict(double x)
-        {
-            return Slope * x + Intercept;
-        }
+        public double Predict(double x) => Slope * x + Intercept;
     }
 }

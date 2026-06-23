@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using UIIA.Models;
@@ -26,11 +27,35 @@ namespace UIIA.Controllers
         {
             if (request == null)
             {
-                return BadRequest("Request body is required.");
+                return BadRequest("Тело запроса является обязательным.");
             }
 
-            var result = await _orchestrator.ExecuteTestAsync(request);
-            return Json(new { status = "completed", reportPath = result });
+            try
+            {
+                var result = await _orchestrator.ExecuteTestAsync(request);
+                return Json(new { status = "completed", reportPath = result });
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("уже выполняется"))
+            {
+                return Conflict(new { title = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { title = ex.Message });
+            }
+            catch (CsvHelper.HeaderValidationException ex)
+            {
+                var expected = "time_ms, method, endpoint, body_file";
+                var actual = string.Join(", ", ex.Message.Split("Headers: ")[1].Split('\n')[0]);
+                return BadRequest(new
+                {
+                    title = $"Неверный формат CSV-файла. Ожидаются колонки: {expected}. В файле: {actual}"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { title = $"Внутренняя ошибка: {ex.Message}" });
+            }
         }
 
         [HttpGet]

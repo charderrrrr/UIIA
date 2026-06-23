@@ -2,8 +2,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UIIA.Models;
 
@@ -12,6 +12,7 @@ namespace UIIA.Services
     public class HttpTrafficGenerator : ITrafficGenerator
     {
         private readonly HttpClient _httpClient;
+
         private static readonly string[] UserAgents = new[]
         {
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -46,15 +47,9 @@ namespace UIIA.Services
 
         public string Protocol => "http";
 
-        public HttpTrafficGenerator()
+        public HttpTrafficGenerator(HttpClient httpClient)
         {
-            var handler = new HttpClientHandler
-            {
-                AllowAutoRedirect = true,
-                MaxAutomaticRedirections = 3,
-                UseCookies = true
-            };
-            _httpClient = new HttpClient(handler);
+            _httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
         }
 
         public async Task<MetricRecord> SendRequestAsync(string target, TestConfig config)
@@ -91,7 +86,7 @@ namespace UIIA.Services
                     request.Method = HttpMethod.Post;
                 }
 
-                using var cts = new System.Threading.CancellationTokenSource(config.TimeoutMs);
+                using var cts = new CancellationTokenSource(config.TimeoutMs);
                 using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead, cts.Token);
 
                 record.StatusCode = (int)response.StatusCode;
@@ -156,7 +151,7 @@ namespace UIIA.Services
                     request.Headers.TryAddWithoutValidation("Cookie", $"_ga={GenerateSecureRandomString(8)}; _gid={GenerateSecureRandomString(8)}");
                 }
 
-                using var cts = new System.Threading.CancellationTokenSource(config.TimeoutMs);
+                using var cts = new CancellationTokenSource(config.TimeoutMs);
                 using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
 
                 record.StatusCode = (int)response.StatusCode;
@@ -198,7 +193,7 @@ namespace UIIA.Services
 
                 request.Headers.TryAddWithoutValidation("User-Agent", UserAgents[Random.Shared.Next(UserAgents.Length)]);
 
-                using var cts = new System.Threading.CancellationTokenSource(config.TimeoutMs);
+                using var cts = new CancellationTokenSource(config.TimeoutMs);
                 using var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cts.Token);
 
                 record.StatusCode = (int)response.StatusCode;

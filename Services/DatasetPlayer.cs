@@ -18,7 +18,10 @@ namespace UIIA.Services
             using var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 HasHeaderRecord = true,
-                MissingFieldFound = null
+                MissingFieldFound = null,
+                HeaderValidated = null,              
+                BadDataFound = null,                 
+                PrepareHeaderForMatch = args => args.Header.ToLower().Trim() 
             });
             
             return csv.GetRecords<DatasetRecord>().ToList();
