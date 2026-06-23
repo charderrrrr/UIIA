@@ -30,7 +30,7 @@
 
 ### Требования
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download) или выше
+- [.NET 10 SDK](https://dotnet.microsoft.com/download) или выше
 
 ### Клонирование
 
