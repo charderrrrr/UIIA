@@ -1,0 +1,13 @@
+{
+    "name": "UIIA Shkval",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+    "forwardPorts": [5002],
+    "portsAttributes": {
+        "5002": {
+            "label": "UIIA Web App",
+            "onAutoForward": "openBrowser"
+        }
+    },
+    "postCreateCommand": "dotnet restore",
+    "postStartCommand": "dotnet run --urls http://0.0.0.0:5002"
+}
