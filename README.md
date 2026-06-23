@@ -4,6 +4,12 @@
 
 ![UIIA](wwwroot/img/uiia-cat.gif)
 
+## Быстрый запуск в браузере
+
+Нажми кнопку ниже и через минуту проект откроется прямо в браузере:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/username/uiia-uiia-shkval)
+
 ## Возможности
 
 - **Три протокола:** HTTP, Raw TCP, WebSocket
